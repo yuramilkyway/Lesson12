@@ -3,6 +3,12 @@ package heap_oom;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для заполнения памяти в Java Heap Space.
+ * Создает объекты класса BigObject и добавляет в списки
+ * пока программа не завершится с ошибкой OutOfMemoryError
+ * c пометкой Java Heap Space.
+ */
 public class OutOfMemoryErrorCreator {
 
     public void generateOOM() {
@@ -16,6 +22,7 @@ public class OutOfMemoryErrorCreator {
             }
             System.out.println("Used MB: " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024*1024));
             System.out.println("Free MB: " + (Runtime.getRuntime().freeMemory()) / (1024*1024));
+            //Просим компилятор запустить GB.
             temp.clear();
         }
     }

@@ -5,6 +5,10 @@ import meta_space.OutOfMetaspaceErrorCreator;
 
 import java.util.Scanner;
 
+/**
+ * Консольное меню проекта.
+ * Дает возможнсоть запуска методов из консоли.
+ */
 public class ConsoleMenu {
     private final Scanner scanner;
 
@@ -18,6 +22,19 @@ public class ConsoleMenu {
         System.out.println("3. Выход из приложения.");
     }
 
+    /**
+     * Метод запуска консольного меню.
+     * 1) Запуск метода OutOfMemoryErrorCreator().generateOOM()
+     * Чтобы через некоторое время программа завершилась
+     * с ошибкой OutOfMemoryError c пометкой Java Heap Space.
+     *
+     * 2) Запуск метода OutOfMetaspaceErrorCreator().generateOOME()
+     * Чтобы через некоторое время программа завершилась
+     * с ошибкой OutOfMemoryError в Metaspace.
+     *
+     * 3) Завершение программы.
+     * При невалидном вводе, выводит "заглушку".
+     */
     public void start() {
         if (this.scanner != null) {
             int key;

@@ -9,12 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Класс для заполнения памяти в Metaspace.
+ * Загружает преобразованный байт-код класса BigBoss
+ * в список, пока приложение не завершится
+ * с ошибкой OutOfMemoryError в Metaspace.
+ */
 public class OutOfMetaspaceErrorCreator {
 
+    /**
+     * Метод для завершения программы с ошибкой OutOfMemoryError в Metaspace.
+     */
     public void generateOOME() {
         List<MyClassLoader> classLoaderList = new ArrayList<>();
+
         //Получаем список областей памяти JVM
         List<MemoryPoolMXBean> memPool = ManagementFactory.getMemoryPoolMXBeans();
+
         //Ищем среди областей ту, у которой есть имя "Metaspace"
         final Optional<MemoryPoolMXBean> metaspaceBean = memPool.stream().filter(
                 (bean) -> bean.getName().equals("Metaspace")).findAny();
@@ -37,6 +48,10 @@ public class OutOfMetaspaceErrorCreator {
         }
     }
 
+    /**
+     * Метод записывает класс BigBoy в байткод и
+     * возвращает преобразованный байт-код в java.lang.Class, осуществляя его валидацию;
+     */
     private static class MyClassLoader extends ClassLoader {
         @Override
         protected Class<?> findClass(String name) throws ClassNotFoundException {
@@ -48,6 +63,4 @@ public class OutOfMetaspaceErrorCreator {
             }
         }
     }
-
-
 }
